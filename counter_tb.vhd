@@ -49,7 +49,7 @@ ARCHITECTURE behavior OF counter_tb IS
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: entity work.counter generic map (clk_frequency => 10) PORT MAP (
+   uut: entity work.counter generic map (clk_frequency => 2) PORT MAP (
           load_button => load_button,
           start => start,
           reset => reset,
