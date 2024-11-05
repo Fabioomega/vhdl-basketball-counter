@@ -42,6 +42,7 @@ ARCHITECTURE behavior OF counter_tb IS
    signal start : std_logic := '0';
    signal reset : std_logic := '0';
    signal clk : std_logic := '0';
+   signal chaves: std_logic_vector(6 downto 0) := "0000111";
 
    -- Clock period definitions
    constant clk_period : time := 10 ns;
@@ -53,7 +54,8 @@ BEGIN
           load_button => load_button,
           start => start,
           reset => reset,
-          clk => clk
+          clk => clk,
+          chaves => chaves
         );
 
    -- Clock process definitions
@@ -66,4 +68,6 @@ BEGIN
    end process;
 	
 	reset <= '1', '0' after 10ns;
+   
+   load_button <= '1' after 15ns;
 END;
