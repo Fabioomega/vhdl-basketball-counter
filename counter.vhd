@@ -19,6 +19,7 @@
 ----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
+use IEEE.NUMERIC_STD.ALL;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -38,7 +39,8 @@ entity counter is
 		load_button : in std_logic;
 		start : in std_logic;
 		reset : in std_logic;
-		clk : in std_logic
+		clk : in std_logic;
+		chaves : in std_logic_vector(6 downto 0)
 	);
 end counter;
 
@@ -74,13 +76,46 @@ architecture Behavioral of counter is
 	type states is (REP, LOAD, COUNT);
 
 	signal EA, PE : states;
-
+	--EA -> Estado atual
+	--PE -> Próximo estado
 	signal divisor : integer range 0 to (clk_frequency_half - 1);
 
 	signal seconds_counter : integer range 0 to 59;
 	signal minutes_counter : integer range 0 to 99;
 	
 begin
+	state_machine : process (clk, reset)
+	begin
+		if reset = '1' then
+			EA <= REP;
+		else
+			if clk'event and clk = '1' then
+				case EA is
+					when REP =>
+						if load_button = '1' then
+							PE <= LOAD;
+						else
+							PE <= REP;
+						end if;
+					when LOAD =>
+						minutes_counter <= to_integer(unsigned(chaves));
+						if start = '1' then
+							PE <= COUNT;
+						else
+							PE <= LOAD;
+						end if;
+					when COUNT =>
+						if seconds_counter = 0 and minutes_counter = 0 then
+							PE <= REP;
+						else
+							PE <= COUNT;
+						end if;
+				end case;
+				EA <= PE;
+			end if;
+		end if;
+	end process;
+
 	clk_divisor_1s : process (clk, reset)
 		constant upper_bound : integer := (clk_frequency_half - 1);
 	begin
@@ -102,13 +137,17 @@ begin
 	seconds_counter_process : process (clk_internal, reset)
 	begin
 		if reset = '1' then
-			seconds_counter <= 59;
+			seconds_counter <= 0;
 		else
 			if clk_internal'event and clk_internal = '1' then
-				if seconds_counter = 0 then
-					seconds_counter <= 59;
+				if EA = COUNT then
+					if seconds_counter = 0 then
+						seconds_counter <= 59;
+					else
+						seconds_counter <= seconds_counter - 1;
+					end if;
 				else
-					seconds_counter <= seconds_counter - 1;
+					seconds_counter <= seconds_counter;
 				end if;
 			end if;
 		end if;
@@ -117,20 +156,22 @@ begin
 	minutes_counter_process : process (clk_internal, reset)
 	begin
 		if reset = '1' then
-			minutes_counter <= 15;
+			minutes_counter <= 0;
 		else
 			if clk_internal'event and clk_internal = '1' then
-				if seconds_counter = 0 then
-					if minutes_counter = 0 then
-						minutes_counter <= 15;
+				if EA = COUNT then
+					if seconds_counter = 0 then
+						if minutes_counter = 0 then
+							minutes_counter <= 15;
+						else
+							minutes_counter <= minutes_counter - 1;
+						end if;
 					else
-						minutes_counter <= minutes_counter - 1;
+						minutes_counter <= minutes_counter;
 					end if;
 				else
 					minutes_counter <= minutes_counter;
 				end if;
-			else
-				minutes_counter <= minutes_counter;
 			end if;
 		end if;
 	end process;
