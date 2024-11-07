@@ -69,5 +69,7 @@ BEGIN
 	
 	reset <= '1', '0' after 10ns;
    
-   load_button <= '1' after 15ns;
+   load_button <= '1' after 15ns, '0' after 20ns;
+
+   start <= '1' after 30ns, '0' after 80ns;
 END;

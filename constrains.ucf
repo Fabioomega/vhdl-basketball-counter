@@ -1,0 +1,35 @@
+### UCF do Projeto Somador de 4 Bits com Vai-um 
+###	nu'meros mostrados nos displays e vai-um no led LD0
+
+## Sinais de controle do display
+NET "clock" LOC = B8; # clock vem do cristal
+NET "reset" LOC = B18; # reset vem do bot~ao BTN0
+
+# Sinais de carga e start
+NET "load_button" LOC = H13; # carga associado ao BTN3
+NET "start" LOC = E18; # conta associado ao BTN2
+
+# Chaves de entrada do contador
+NET "chaves[0]" LOC = G18;
+NET "chaves[1]" LOC = H18;
+NET "chaves[2]" LOC = K18;
+NET "chaves[3]" LOC = K17;
+NET "chaves[4]" LOC = L14;
+NET "chaves[5]" LOC = L13;
+NET "chaves[6]" LOC = N17;
+
+## Pinos do display
+NET "dec_ddp[7]"	LOC = L18;	# Segmento a
+NET "dec_ddp[6]"	LOC = F18;	# Segmento b
+NET "dec_ddp[5]"	LOC = D17;	# Segmento c
+NET "dec_ddp[4]"	LOC = D16;	# Segmento d
+NET "dec_ddp[3]"	LOC = G14;	# Segmento e
+NET "dec_ddp[2]"	LOC = J17;	# Segmento f
+NET "dec_ddp[1]"	LOC = H14;	# Segmento g
+NET "dec_ddp[0]"	LOC = C17;	# Segmento dp - decimal point
+
+NET "an[3]"	LOC = F17;	# anodo 3
+NET "an[2]"	LOC = H17;	# anodo 2
+NET "an[1]"	LOC = C18;	# anodo 1
+NET "an[0]"	LOC = F15;	# anodo 0
+

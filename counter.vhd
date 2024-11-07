@@ -19,7 +19,7 @@
 ----------------------------------------------------------------------------------
 library IEEE;
 use IEEE.STD_LOGIC_1164.all;
-use IEEE.NUMERIC_STD.ALL;
+use IEEE.NUMERIC_STD.all;
 
 -- Uncomment the following library declaration if using
 -- arithmetic functions with Signed or Unsigned values
@@ -40,7 +40,9 @@ entity counter is
 		start : in std_logic;
 		reset : in std_logic;
 		clk : in std_logic;
-		chaves : in std_logic_vector(6 downto 0)
+		chaves : in std_logic_vector(6 downto 0);
+		an: out STD_LOGIC_VECTOR (3 downto 0);
+		dec_ddp: out STD_LOGIC_VECTOR (7 downto 0)
 	);
 end counter;
 
@@ -82,37 +84,38 @@ architecture Behavioral of counter is
 
 	signal seconds_counter : integer range 0 to 59;
 	signal minutes_counter : integer range 0 to 99;
-	
+
+	signal d1: std_logic_vector(5 downto 0);
+	signal d2: std_logic_vector(5 downto 0);
+	signal d3: std_logic_vector(5 downto 0);
+	signal d4: std_logic_vector(5 downto 0);
+
+	signal sec_bcd : std_logic_vector(7 downto 0);
+	signal min_bcd : std_logic_vector(7 downto 0);
+
 begin
-	state_machine : process (clk, reset)
+	state_machine : process (clk_internal, reset)
 	begin
 		if reset = '1' then
 			EA <= REP;
-		else
-			if clk'event and clk = '1' then
-				case EA is
-					when REP =>
-						if load_button = '1' then
-							PE <= LOAD;
-						else
-							PE <= REP;
-						end if;
-					when LOAD =>
-						minutes_counter <= to_integer(unsigned(chaves));
-						if start = '1' then
-							PE <= COUNT;
-						else
-							PE <= LOAD;
-						end if;
-					when COUNT =>
-						if seconds_counter = 0 and minutes_counter = 0 then
-							PE <= REP;
-						else
-							PE <= COUNT;
-						end if;
-				end case;
-				EA <= PE;
-			end if;
+			PE <= REP;
+		elsif clk_internal'event and clk_internal = '1' then
+			case EA is
+				when REP =>
+					if load_button = '1' then
+						PE <= LOAD;
+					end if;
+				when LOAD =>
+					if start = '1' then
+						PE <= COUNT;
+					end if;
+				when COUNT =>
+					if seconds_counter = 0 and minutes_counter = 0 then
+						PE <= REP;
+					end if;
+			end case;
+
+			EA <= PE;
 		end if;
 	end process;
 
@@ -138,17 +141,17 @@ begin
 	begin
 		if reset = '1' then
 			seconds_counter <= 0;
-		else
-			if clk_internal'event and clk_internal = '1' then
-				if EA = COUNT then
-					if seconds_counter = 0 then
-						seconds_counter <= 59;
-					else
-						seconds_counter <= seconds_counter - 1;
-					end if;
+		elsif clk_internal'event and clk_internal = '1' then
+			if EA = COUNT then
+				if seconds_counter = 0 then
+					seconds_counter <= 59;
 				else
-					seconds_counter <= seconds_counter;
+					seconds_counter <= seconds_counter - 1;
 				end if;
+			end if;
+
+			if EA = REP then
+				seconds_counter <= 0;
 			end if;
 		end if;
 	end process;
@@ -157,23 +160,40 @@ begin
 	begin
 		if reset = '1' then
 			minutes_counter <= 0;
-		else
-			if clk_internal'event and clk_internal = '1' then
-				if EA = COUNT then
-					if seconds_counter = 0 then
-						if minutes_counter = 0 then
-							minutes_counter <= 15;
-						else
-							minutes_counter <= minutes_counter - 1;
-						end if;
-					else
-						minutes_counter <= minutes_counter;
-					end if;
-				else
-					minutes_counter <= minutes_counter;
+		elsif clk_internal'event and clk_internal = '1' then
+			if EA = COUNT then
+				if seconds_counter = 0 then
+					minutes_counter <= minutes_counter - 1;
 				end if;
+			end if;
+			
+			if EA = LOAD then
+				minutes_counter <= to_integer(unsigned(chaves));
+			end if;
+
+			if EA = REP then
+				minutes_counter <= 0;
 			end if;
 		end if;
 	end process;
+
+	sec_bcd <= conv_to_BCD(seconds_counter);
+	min_bcd <= conv_to_BCD(minutes_counter);
+
+	d4 <= '1' & sec_bcd(3 downto 0) & '1';
+	d3 <= '1' & sec_bcd(7 downto 4) & '1';
+	d2 <= '1' & min_bcd(3 downto 0) & '0';
+	d1 <= '1' & min_bcd(7 downto 0) & '1';
+
+	display_driver: entity work.dspl_drv port map (
+		clock => clk,
+		reset => reset,
+		d4 => d4,
+		d3 => d3,
+		d2 => d2,
+		d1 => d1,
+		an => an,
+		dec_ddp => dec_ddp
+	);
 
 end Behavioral;
