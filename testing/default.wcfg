@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="/home/fabio/Documents/ISE/vhdl-basketball-counter/counter_tb_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="counter_tb" />
+            <top_module name="numeric_std" />
+            <top_module name="std_logic_1164" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="10" />
+   <wvobject fp_name="/counter_tb/load_button" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">load_button</obj_property>
+      <obj_property name="ObjectShortName">load_button</obj_property>
+   </wvobject>
+   <wvobject fp_name="/counter_tb/start" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">start</obj_property>
+      <obj_property name="ObjectShortName">start</obj_property>
+   </wvobject>
+   <wvobject fp_name="/counter_tb/reset" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/counter_tb/uut/clk_internal" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clk_internal</obj_property>
+      <obj_property name="ObjectShortName">clk_internal</obj_property>
+   </wvobject>
+   <wvobject fp_name="/counter_tb/chaves" type="array" db_ref_id="1">
+      <obj_property name="ElementShortName">chaves[6:0]</obj_property>
+      <obj_property name="ObjectShortName">chaves[6:0]</obj_property>
+   </wvobject>
+   <wvobject fp_name="/counter_tb/clk_period" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">clk_period</obj_property>
+      <obj_property name="ObjectShortName">clk_period</obj_property>
+   </wvobject>
+   <wvobject fp_name="/counter_tb/uut/ea" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">ea</obj_property>
+      <obj_property name="ObjectShortName">ea</obj_property>
+   </wvobject>
+   <wvobject fp_name="/counter_tb/uut/pe" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">pe</obj_property>
+      <obj_property name="ObjectShortName">pe</obj_property>
+   </wvobject>
+   <wvobject fp_name="/counter_tb/uut/minutes_counter" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">minutes_counter</obj_property>
+      <obj_property name="ObjectShortName">minutes_counter</obj_property>
+   </wvobject>
+   <wvobject fp_name="/counter_tb/uut/seconds_counter" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">seconds_counter</obj_property>
+      <obj_property name="ObjectShortName">seconds_counter</obj_property>
+   </wvobject>
+</wave_config>

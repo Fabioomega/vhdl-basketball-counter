@@ -9,6 +9,6 @@
 *.o
 *.html
 *.wdb
-*.xise
 *.cmd
 *.log
+isim/
