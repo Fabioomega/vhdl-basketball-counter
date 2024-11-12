@@ -48,14 +48,16 @@ ARCHITECTURE behavior OF counter_tb IS
    constant clk_period : time := 10 ns;
  
 BEGIN
- 
+
 	-- Instantiate the Unit Under Test (UUT)
    uut: entity work.counter generic map (clk_frequency => 2) PORT MAP (
           load_button => load_button,
           start => start,
           reset => reset,
           clk => clk,
-          chaves => chaves
+          chaves => chaves,
+          an => open,
+          dec_ddp => open
         );
 
    -- Clock process definitions

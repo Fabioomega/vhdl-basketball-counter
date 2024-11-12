@@ -143,15 +143,11 @@ begin
 			seconds_counter <= 0;
 		elsif clk_internal'event and clk_internal = '1' then
 			if EA = COUNT then
-				if seconds_counter = 0 then
+				if seconds_counter = 0 and minutes_counter /= 0 then
 					seconds_counter <= 59;
-				else
+				elsif seconds_counter /= 0 then
 					seconds_counter <= seconds_counter - 1;
 				end if;
-			end if;
-
-			if EA = REP then
-				seconds_counter <= 0;
 			end if;
 		end if;
 	end process;
@@ -162,17 +158,13 @@ begin
 			minutes_counter <= 0;
 		elsif clk_internal'event and clk_internal = '1' then
 			if EA = COUNT then
-				if seconds_counter = 0 then
+				if seconds_counter = 0 and minutes_counter /= 0 then
 					minutes_counter <= minutes_counter - 1;
 				end if;
 			end if;
 			
 			if EA = LOAD then
 				minutes_counter <= to_integer(unsigned(chaves));
-			end if;
-
-			if EA = REP then
-				minutes_counter <= 0;
 			end if;
 		end if;
 	end process;
@@ -183,7 +175,7 @@ begin
 	d4 <= '1' & sec_bcd(3 downto 0) & '1';
 	d3 <= '1' & sec_bcd(7 downto 4) & '1';
 	d2 <= '1' & min_bcd(3 downto 0) & '0';
-	d1 <= '1' & min_bcd(7 downto 0) & '1';
+	d1 <= '1' & min_bcd(7 downto 4) & '1';
 
 	display_driver: entity work.dspl_drv port map (
 		clock => clk,
