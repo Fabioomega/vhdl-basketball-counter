@@ -34,19 +34,23 @@ entity sec_counter is
 	port(
 		clk: in std_logic;
 		enable: in std_logic;
-		reset: in std_logic;--???
+		reset: in std_logic;
 		state: in STATE;
-		passed_sec: out std_logic
+		passed_sec: out std_logic;
+		output_sec: out integer range 0 to 99
 	);
 end sec_counter;
 
 architecture Behavioral of sec_counter is
 	signal counter : integer range 0 to 99;
 begin
+	output_sec <= counter;
+
 	process (clk, reset)
 	begin
 		if reset = '1' then
 			counter <= 99;
+			passed_sec <= '0';--adicionado depois
 		elsif clk'event and clk = '1' then
 			if enable = '1' then
 				if counter = 0 then --ou seja deu um sec
