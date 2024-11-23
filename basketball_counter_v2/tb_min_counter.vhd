@@ -2,15 +2,15 @@
 -- Company: 
 -- Engineer:
 --
--- Create Date:   20:15:33 11/22/2024
+-- Create Date:   21:19:45 11/22/2024
 -- Design Name:   
--- Module Name:   /home/lanzuolo/vhdl-basketball-counter/basketball_counter_v2/tb_sec_counter.vhd
+-- Module Name:   /home/lanzuolo/vhdl-basketball-counter/basketball_counter_v2/tb_min_counter.vhd
 -- Project Name:  basketball_counter_v2
 -- Target Device:  
 -- Tool versions:  
 -- Description:   
 -- 
--- VHDL Test Bench Created by ISE for module: sec_counter
+-- VHDL Test Bench Created by ISE for module: min_counter
 -- 
 -- Dependencies:
 -- 
@@ -33,11 +33,13 @@ use work.constants.all;
 -- arithmetic functions with Signed or Unsigned values
 --USE ieee.numeric_std.ALL;
  
-ENTITY tb_sec_counter IS
-END tb_sec_counter;
+ENTITY tb_min_counter IS
+END tb_min_counter;
  
-ARCHITECTURE behavior OF tb_sec_counter IS 
-   
+ARCHITECTURE behavior OF tb_min_counter IS 
+ 
+    -- Component Declaration for the Unit Under Test (UUT)
+
    --Inputs
    signal clk : std_logic := '0';
    signal enable : std_logic := '0';
@@ -45,8 +47,8 @@ ARCHITECTURE behavior OF tb_sec_counter IS
    signal state : STATE := REP;
 
  	--Outputs
-   signal passed_sec : std_logic;
-   signal output_sec : integer range 0 to 99;
+   signal passed_min : std_logic;
+   signal output_min : integer range 0 to 59;
 
    -- Clock period definitions
    constant clk_period : time := 10 ns;
@@ -54,12 +56,13 @@ ARCHITECTURE behavior OF tb_sec_counter IS
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: entity work.sec_counter PORT MAP (
+   uut: entity work.min_counter PORT MAP (
           clk => clk,
           enable => enable,
           reset => reset,
           state => state,
-          passed_sec => passed_sec
+          passed_min => passed_min,
+          output_min => output_min
         );
 
    -- Clock process definitions
@@ -70,7 +73,8 @@ BEGIN
 		clk <= '1';
 		wait for clk_period/2;
    end process;
- 
+	
 	reset <= '1', '0' after 10ns;
 	enable <= '1';
+
 END;

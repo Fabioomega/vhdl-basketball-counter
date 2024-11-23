@@ -2,9 +2,9 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date:    19:29:44 11/22/2024 
+-- Create Date:    20:53:28 11/22/2024 
 -- Design Name: 
--- Module Name:    sec_counter - Behavioral 
+-- Module Name:    min_counter - Behavioral 
 -- Project Name: 
 -- Target Devices: 
 -- Tool versions: 
@@ -30,34 +30,33 @@ use work.constants.all;
 --library UNISIM;
 --use UNISIM.VComponents.all;
 
-entity sec_counter is
+entity min_counter is
 	port(
 		clk: in std_logic;
 		enable: in std_logic;
 		reset: in std_logic;
 		state: in STATE;
-		passed_sec: out std_logic;
-		output_sec: out integer range 0 to 99
+		passed_min: out std_logic;
+		output_min: out integer range 0 to 59--60 segundos são um minito
 	);
-end sec_counter;
+end min_counter;
 
-architecture Behavioral of sec_counter is
+architecture Behavioral of min_counter is
 	signal counter : integer range 0 to 99;
 begin
-	output_sec <= counter;
-
+	output_min <= counter;
 	process (clk, reset)
 	begin
 		if reset = '1' then
-			counter <= 99;
-			passed_sec <= '0';--adicionado depois
-		elsif clk'event and clk = '1' then
+			counter <= 59;
+			passed_min <= '0';--adicionado depois
+		elsif clk'event and clk = '1' then--lógica da borda de subida do clock
 			if enable = '1' then
-				if counter = 0 then --ou seja deu um sec
-					passed_sec <= '1';
-					counter <= 99;
+				if counter = 0 then --ou seja deu um minuto
+					passed_min <= '1';
+					counter <= 59;
 				else
-					passed_sec <= '0';
+					passed_min <= '0';
 					counter <= counter-1;
 				end if;
 			end if;
