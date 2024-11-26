@@ -11,7 +11,7 @@ library IEEE;
 use IEEE.STD_LOGIC_1164.all;
 use work.constants.all;
 
-entity min_counter is
+entity min15_counter is
     port (
         clk: in std_logic; 
         enable: in std_logic;
@@ -21,9 +21,9 @@ entity min_counter is
         minutos: out integer range 0 to 15;
         min_enable: out std_logic 
     );
-end min_counter;
+end min15_counter;
 
-architecture Behavioral of min_counter is
+architecture Behavioral of min15_counter is
     signal contador_interno: integer range 0 to 15 := 15;
 begin
     process(clk, reset)
@@ -64,4 +64,4 @@ begin
     end process;
 
     minutos <= contador_interno;
-end Behavioral;
+end Behavioral;

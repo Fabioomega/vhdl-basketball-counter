@@ -57,7 +57,7 @@ ARCHITECTURE behavior OF tb_min15_counter IS
 BEGIN
  
 	-- Instantiate the Unit Under Test (UUT)
-   uut: entity work.min_counter PORT MAP (
+   uut: entity work.min15_counter PORT MAP (
           clk => clk,
           enable => enable,
           state => state,
