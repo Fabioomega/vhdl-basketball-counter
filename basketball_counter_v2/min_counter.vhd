@@ -2,7 +2,7 @@
 -- Company: 
 -- Engineer: 
 -- 
--- Create Date:    20:53:28 11/22/2024 
+-- Create Date:    19:29:44 11/22/2024 
 -- Design Name: 
 -- Module Name:    min_counter - Behavioral 
 -- Project Name: 
@@ -36,31 +36,52 @@ entity min_counter is
 		enable: in std_logic;
 		reset: in std_logic;
 		state: in STATE;
-		passed_min: out std_logic;
-		output_min: out integer range 0 to 59--60 segundos são um minito
+		min_enable: out std_logic;
+		output_secs: out integer range 0 to 59;
+		valor_carregado: in integer range 0 to 59
 	);
 end min_counter;
 
 architecture Behavioral of min_counter is
-	signal counter : integer range 0 to 99;
+	signal counter : integer range 0 to 59;
 begin
-	output_min <= counter;
+	output_secs <= counter;
+
 	process (clk, reset)
 	begin
 		if reset = '1' then
 			counter <= 59;
-			passed_min <= '0';--adicionado depois
-		elsif clk'event and clk = '1' then--lógica da borda de subida do clock
-			if enable = '1' then
-				if counter = 0 then --ou seja deu um minuto
-					passed_min <= '1';
-					counter <= 59;
-				else
-					passed_min <= '0';
-					counter <= counter-1;
-				end if;
-			end if;
+			min_enable <= '0';--adicionado depois
+		elsif clk'event and clk = '1' then
+			case state is
+				when REP =>
+				when CONTA =>
+        	        -- Estado de contagem decrementa se habilitado e maior que 0
+						if enable = '1' then
+							if counter = 0 then --ou seja deu um sec
+								min_enable <= '1';
+								counter <= 59;
+							else
+								min_enable <= '0';
+								counter <= counter-1;
+							end if;
+						end if;
+				when LOAD =>
+        	        -- Estado de carga (carregar valor externo)
+					counter <= valor_carregado;
+					min_enable <= '0';
+						
+				when PARADO =>
+        	        -- Estado parado (mantém o valor atual)
+					min_enable <= '0';
+						
+				when others =>
+					-- Estado de segurança
+					counter <= counter;
+					min_enable <= '0';
+			end case;
 		end if;
+					
 	end process;
 
 end Behavioral;

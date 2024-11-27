@@ -43,10 +43,11 @@ ARCHITECTURE behavior OF tb_sec_counter IS
    signal enable : std_logic := '0';
    signal reset : std_logic := '0';
    signal state : STATE := REP;
+   signal valor_carregado : integer := 8; -- Corrigido
 
  	--Outputs
    signal passed_sec : std_logic;
-   signal output_sec : integer range 0 to 99;
+   signal output_cents : integer;
 
    -- Clock period definitions
    constant clk_period : time := 10 ns;
@@ -59,7 +60,9 @@ BEGIN
           enable => enable,
           reset => reset,
           state => state,
-          passed_sec => passed_sec
+          passed_sec => passed_sec,
+          valor_carregado => valor_carregado,
+          output_cents => output_cents---needed?
         );
 
    -- Clock process definitions
@@ -71,6 +74,39 @@ BEGIN
 		wait for clk_period/2;
    end process;
  
-	reset <= '1', '0' after 10ns;
-	enable <= '1';
+	-- reset <= '1', '0' after 10ns;
+	-- enable <= '1';
+   sin_entradas: process
+   begin
+      -- Reset
+      reset <= '1';
+      wait for 20 ns;
+      reset <= '0';
+
+      -- Testar REP (reset do contador)
+      state <= REP;
+      wait for clk_period * 5;
+
+      -- Testa LOAD (carregar valor)
+      state <= LOAD;
+      valor_carregado <= 12;
+      wait for clk_period * 5;
+
+      -- Testa CONTA (contagem decrescente)
+      state <= CONTA;
+      enable <= '1';
+      wait for clk_period * 16;
+
+      -- Teste PARADO (pausa)
+      state <= PARADO;
+      enable <= '0';
+      wait for clk_period * 5;
+
+      -- Retorna estado REP (renício)
+      state <= REP;
+      wait for clk_period * 5;
+
+      wait;
+   end process;
+
 END;
