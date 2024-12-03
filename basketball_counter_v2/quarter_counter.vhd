@@ -28,8 +28,7 @@ entity quarter_counter is
         state: in STATE;
         reset: in std_logic;
         quarter: out integer range 0 to 4;
-        valor_carregado: in integer range 0 to 4;
-        quarter_enable: out std_logic
+        valor_carregado: in integer range 0 to 3
     );
 end quarter_counter;
 
@@ -40,38 +39,30 @@ begin
 	 begin
         if reset = '1' then
             contador_interno <= 4;
-            quarter_enable <= '0';
         elsif clk'event and clk = '1' then
             case state is
                 when REP =>
                     -- Reseta o contador para 4
                     contador_interno <= 4;
-                    quarter_enable <= '0';
 
                 when CONTA =>
                     -- Estado de contagem decrementa se habilitado e maior que 0
                     if enable = '1' then
                         if contador_interno > 0 then
                             contador_interno <= contador_interno-1;
-                            quarter_enable <= '0';
-                        else
-                            quarter_enable <= '1';
                         end if;
                     end if;
                 
                 when LOAD =>
                     -- Estado de carga (carregam valor externo)
                     contador_interno <= valor_carregado;
-                    quarter_enable <= '0';
                 
                 when PARADO =>
-                    -- Estado parado (mantém o valor atual)
-                    quarter_enable <= '0';
-                
+                    -- Estado parado (mantm o valor atual)
+						  
                 when others =>
-                    -- Estado de segurança
+                    -- Estado de segurana
                     contador_interno <= contador_interno;
-                    quarter_enable <= '0';
             end case;
         end if;
     end process;

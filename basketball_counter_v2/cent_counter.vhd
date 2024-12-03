@@ -33,7 +33,7 @@ use work.constants.all;
 
 entity cent_counter is
 	generic (
-		counts_to_cent : integer := 50_000
+		counts_to_cent : integer := 25_000
 	);
 	port (
 		reset : in std_logic;

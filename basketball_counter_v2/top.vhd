@@ -46,7 +46,7 @@ architecture Behavioral of top is
 	signal cents : integer range 0 to 99;
 	signal seconds : integer range 0 to 59;
 	signal minutes : integer range 0 to 59;
-	signal quarter : integer range 0 to 3;
+	signal quarter : integer range 0 to 4;
 
 	signal passed_cent : std_logic;
 	signal passed_sec : std_logic;
@@ -55,7 +55,7 @@ architecture Behavioral of top is
 
 	signal loaded_secs : integer range 0 to 59;
 	signal loaded_min : integer range 0 to 15;
-	signal loaded_quarts : integer range 0 to 3;
+	signal loaded_quarters : integer range 0 to 4;
 
 	signal d_para_continua : std_logic;
 	signal d_novo_quarto : std_logic;
@@ -69,8 +69,11 @@ architecture Behavioral of top is
 		0, 15, 30, 45
 	);
 
-	signal c_unsigned_seconds : integer range 0 to 3;
-	signal c_unsigned_minutes : integer range 0 to 15;
+	type quarter_table is array (0 to 3) of integer range 0 to 4;
+
+	constant c_quarter_to_quarters : quarter_table := (
+		1, 2, 3, 4
+	);
 
 begin
 
@@ -100,8 +103,9 @@ begin
 	d_carga <= carga;
 	--------------------------------------------
 
-	c_unsigned_seconds <= c_seconds_to_secs(to_integer(unsigned(c_segundos)));
-	c_unsigned_minutes <= to_integer(unsigned(c_minutos));
+	loaded_secs <= c_seconds_to_secs(to_integer(unsigned(c_segundos)));
+	loaded_min <= to_integer(unsigned(c_minutos));
+	loaded_quarters <= c_quarter_to_quarters(to_integer(unsigned(c_quarto)));
 
 	cent_counter : entity work.cent_counter generic map (
 		counts_to_cent => cycles_for_1_cent
@@ -118,41 +122,46 @@ begin
 		enable => passed_cent,
 		reset => reset,
 		state => cur_state,
-		passed_sec => passed_sec,
 		output_cents => cents
 		);
+
+	passed_sec <= '1' when (cents = 0) and (passed_cent = '1') else
+		'0';
 
 	min_counter : entity work.min_counter port map (
 		clk => clock,
 		enable => passed_sec,
 		reset => reset,
 		state => cur_state,
-		min_enable => passed_min,
 		output_secs => seconds,
-		valor_carregado => c_unsigned_seconds
+		valor_carregado => loaded_secs
 		);
+
+	passed_min <= '1' when (seconds = 0) and (passed_sec = '1') else
+		'0';
 
 	min15_counter : entity work.min15_counter port map (
 		clk => clock,
 		enable => passed_min,
 		state => cur_state,
 		reset => reset,
-		valor_carregado => c_unsigned_minutes,
-		minutos => minutes,
-		min_enable => passed_quarter
+		valor_carregado => loaded_min,
+		minutos => minutes
 		);
+
+	passed_quarter <= '1' when (minutes = 0) and (passed_min = '1') else
+		'0';
 
 	quarter_counter : entity work.quarter_counter port map (
 		clk => clock,
 		enable => passed_quarter,
 		state => cur_state,
 		reset => reset,
-		quarter => quarter
-		valor_carregado : in integer range 0 to 4;
-		quarter_enable : out std_logic
+		quarter => quarter,
+		valor_carregado => loaded_quarters
 		);
 
-	fim_quarto <= '1' when (minutes = 0) and (seconds = 0) and (cents = 0) else
+	fim_quarto <= '1' when (minutes = 0) and (seconds = 0) and (cents = 0) and (quarter = 0) else
 		'0';
 
 	process (clock, reset)

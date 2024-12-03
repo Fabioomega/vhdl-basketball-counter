@@ -36,7 +36,6 @@ entity sec_counter is
 		enable : in std_logic;
 		reset : in std_logic;
 		state : in STATE;
-		passed_sec : out std_logic;
 		output_cents : out integer range 0 to 99
 	);
 end sec_counter;
@@ -50,7 +49,6 @@ begin
 	begin
 		if reset = '1' then
 			counter <= 99;
-			passed_sec <= '0';--adicionado depois
 		elsif clk'event and clk = '1' then
 			case state is
 				when REP =>
@@ -58,25 +56,17 @@ begin
 					-- Estado de contagem decrementa se habilitado e maior que 0
 					if enable = '1' then
 						if counter = 0 then --ou seja deu um cent
-							passed_sec <= '1';
 							counter <= 99;
 						else
 							counter <= counter - 1;
-							passed_sec <= '0';
 						end if;
-					else
-						passed_sec <= '0';
 					end if;
 					-- end if;
 				when LOAD =>
 				when PARADO =>
-					-- Estado parado (mantm o valor atual)
-					passed_sec <= '0';
-
 				when others =>
 					-- Estado de segurana
 					counter <= counter;
-					passed_sec <= '0';
 			end case;
 		end if;
 

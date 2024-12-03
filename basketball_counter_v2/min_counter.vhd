@@ -36,7 +36,6 @@ entity min_counter is
 		enable : in std_logic;
 		reset : in std_logic;
 		state : in STATE;
-		min_enable : out std_logic;
 		output_secs : out integer range 0 to 59;
 		valor_carregado : in integer range 0 to 59
 	);
@@ -51,7 +50,6 @@ begin
 	begin
 		if reset = '1' then
 			counter <= 59;
-			min_enable <= '0';--adicionado depois
 		elsif clk'event and clk = '1' then
 			case state is
 				when REP =>
@@ -59,28 +57,18 @@ begin
 					-- Estado de contagem decrementa se habilitado e maior que 0
 					if enable = '1' then
 						if counter = 0 then --ou seja deu um sec
-							min_enable <= '1';
 							counter <= 59;
 						else
 							counter <= counter - 1;
-							min_enable <= '0';
 						end if;
-					else
-						min_enable <= '0';
 					end if;
 				when LOAD =>
 					-- Estado de carga (carregar valor externo)
 					counter <= valor_carregado;
-					min_enable <= '0';
-
 				when PARADO =>
-					-- Estado parado (mantém o valor atual)
-					min_enable <= '0';
-
 				when others =>
 					-- Estado de segurança
 					counter <= counter;
-					min_enable <= '0';
 			end case;
 		end if;
 

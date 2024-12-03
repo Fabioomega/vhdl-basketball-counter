@@ -45,8 +45,9 @@ begin
         end process;
 
         reset <= '1', '0' after 10ns;
-		  c_segundos <= "11";
-		  c_minutos <= "0001";
+		  -- c_segundos <= "11";
+		  -- c_minutos <= "0001";
+		  c_quarto <= "00";
 		  carga <= '1' after 20ns, '0' after 30ns;
 		  para_continua <= '1' after 50ns, '0' after 60ns;
 end;
