@@ -18,7 +18,7 @@
 --
 ----------------------------------------------------------------------------------
 library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_1164.all;
 use work.constants.all;
 
 -- Uncomment the following library declaration if using
@@ -31,14 +31,14 @@ use work.constants.all;
 --use UNISIM.VComponents.all;
 
 entity min_counter is
-	port(
-		clk: in std_logic;
-		enable: in std_logic;
-		reset: in std_logic;
-		state: in STATE;
-		min_enable: out std_logic;
-		output_secs: out integer range 0 to 59;
-		valor_carregado: in integer range 0 to 59
+	port (
+		clk : in std_logic;
+		enable : in std_logic;
+		reset : in std_logic;
+		state : in STATE;
+		min_enable : out std_logic;
+		output_secs : out integer range 0 to 59;
+		valor_carregado : in integer range 0 to 59
 	);
 end min_counter;
 
@@ -56,33 +56,34 @@ begin
 			case state is
 				when REP =>
 				when CONTA =>
-        	        -- Estado de contagem decrementa se habilitado e maior que 0
-						if enable = '1' then
-							if counter = 0 then --ou seja deu um sec
-								min_enable <= '1';
-								counter <= 59;
-							else
-								min_enable <= '0';
-								counter <= counter-1;
-							end if;
+					-- Estado de contagem decrementa se habilitado e maior que 0
+					if enable = '1' then
+						if counter = 0 then --ou seja deu um sec
+							min_enable <= '1';
+							counter <= 59;
+						else
+							counter <= counter - 1;
+							min_enable <= '0';
 						end if;
+					else
+						min_enable <= '0';
+					end if;
 				when LOAD =>
-        	        -- Estado de carga (carregar valor externo)
+					-- Estado de carga (carregar valor externo)
 					counter <= valor_carregado;
 					min_enable <= '0';
-						
+
 				when PARADO =>
-        	        -- Estado parado (mantém o valor atual)
+					-- Estado parado (mantém o valor atual)
 					min_enable <= '0';
-						
+
 				when others =>
 					-- Estado de segurança
 					counter <= counter;
 					min_enable <= '0';
 			end case;
 		end if;
-					
+
 	end process;
 
 end Behavioral;
-
