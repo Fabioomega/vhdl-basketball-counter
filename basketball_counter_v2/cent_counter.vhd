@@ -18,8 +18,8 @@
 --
 ----------------------------------------------------------------------------------
 library IEEE;
-use IEEE.STD_LOGIC_1164.ALL;
-use IEEE.NUMERIC_STD.ALL;
+use IEEE.STD_LOGIC_1164.all;
+use IEEE.NUMERIC_STD.all;
 use work.constants.all;
 
 -- Uncomment the following library declaration if using
@@ -33,19 +33,19 @@ use work.constants.all;
 
 entity cent_counter is
 	generic (
-		counts_to_cent: integer := 50_000
+		counts_to_cent : integer := 25_000
 	);
 	port (
-		reset: in std_logic;
-		clk: in std_logic;
-		state: in STATE;
-		passed_cent: out std_logic
+		reset : in std_logic;
+		clk : in std_logic;
+		state : in STATE;
+		passed_cent : out std_logic
 	);
 end cent_counter;
 
 architecture Behavioral of cent_counter is
-	constant counts_to_cent_last: integer := counts_to_cent - 1;
-	signal counter: integer range 0 to counts_to_cent_last;
+	constant counts_to_cent_last : integer := counts_to_cent - 1;
+	signal counter : integer range 0 to counts_to_cent_last;
 begin
 	process (clk, reset)
 	begin
@@ -53,15 +53,16 @@ begin
 			passed_cent <= '0';
 			counter <= 0;
 		elsif clk'event and clk = '1' then
-			if counter = counts_to_cent_last then
-				passed_cent <= '1';
-				counter <= 0;
-			else
-				passed_cent <= '0';
-				counter <= counter + 1;
+			if state = CONTA then
+				if counter = counts_to_cent_last then
+					passed_cent <= '1';
+					counter <= 0;
+				else
+					passed_cent <= '0';
+					counter <= counter + 1;
+				end if;
 			end if;
 		end if;
 	end process;
 
 end Behavioral;
-

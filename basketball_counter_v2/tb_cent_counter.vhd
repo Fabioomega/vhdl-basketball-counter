@@ -5,10 +5,10 @@ use ieee.std_logic_1164.all;
 use ieee.numeric_std.all;
 use work.constants.all;
 
-entity testbench is
-end testbench;
+entity tb_cent_counter is
+end tb_cent_counter;
 
-architecture behavior of testbench is
+architecture behavior of tb_cent_counter is
 
     -- Signals
     signal reset : std_logic := '0';

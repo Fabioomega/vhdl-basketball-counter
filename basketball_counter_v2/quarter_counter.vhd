@@ -27,8 +27,8 @@ entity quarter_counter is
         enable: in std_logic;
         state: in STATE;
         reset: in std_logic;
-        quarter: out integer range 0 to 4;
-        valor_carregado: in integer range 0 to 4;
+        quarter: out integer range 1 to 4;
+        valor_carregado: in integer range 1 to 4;
         quarter_enable: out std_logic
     );
 end quarter_counter;
@@ -78,4 +78,3 @@ begin
                         
     quarter <= contador_interno;            
 end Behavioral;
-

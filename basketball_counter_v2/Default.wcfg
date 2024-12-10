@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wave_config>
+   <wave_state>
+   </wave_state>
+   <db_ref_list>
+      <db_ref path="/home/fabio/Documents/ISE/vhdl-basketball-counter/basketball_counter_v2/tb_top_isim_beh.wdb" id="1" type="auto">
+         <top_modules>
+            <top_module name="constants" />
+            <top_module name="numeric_std" />
+            <top_module name="std_logic_1164" />
+            <top_module name="tb_top" />
+         </top_modules>
+      </db_ref>
+   </db_ref_list>
+   <WVObjectSize size="15" />
+   <wvobject fp_name="/tb_top/clock" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">clock</obj_property>
+      <obj_property name="ObjectShortName">clock</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/reset" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">reset</obj_property>
+      <obj_property name="ObjectShortName">reset</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/para_continua" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">para_continua</obj_property>
+      <obj_property name="ObjectShortName">para_continua</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/novo_quarto" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">novo_quarto</obj_property>
+      <obj_property name="ObjectShortName">novo_quarto</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/carga" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">carga</obj_property>
+      <obj_property name="ObjectShortName">carga</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/cur_state" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">cur_state</obj_property>
+      <obj_property name="ObjectShortName">cur_state</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/next_state" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">next_state</obj_property>
+      <obj_property name="ObjectShortName">next_state</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/passed_cent" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">passed_cent</obj_property>
+      <obj_property name="ObjectShortName">passed_cent</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/cents" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">cents</obj_property>
+      <obj_property name="ObjectShortName">cents</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/passed_sec" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">passed_sec</obj_property>
+      <obj_property name="ObjectShortName">passed_sec</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/seconds" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">seconds</obj_property>
+      <obj_property name="ObjectShortName">seconds</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/passed_min" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">passed_min</obj_property>
+      <obj_property name="ObjectShortName">passed_min</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/minutes" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">minutes</obj_property>
+      <obj_property name="ObjectShortName">minutes</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/passed_quarter" type="logic" db_ref_id="1">
+      <obj_property name="ElementShortName">passed_quarter</obj_property>
+      <obj_property name="ObjectShortName">passed_quarter</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/quarter" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">quarter</obj_property>
+      <obj_property name="ObjectShortName">quarter</obj_property>
+   </wvobject>
+</wave_config>
