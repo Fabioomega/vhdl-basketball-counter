@@ -93,7 +93,7 @@ BEGIN
       valor_carregado <= 3;
       wait for clk_period * 5;
 
-      -- Testa CONTA (contagem decrescente)
+      -- Testa CONTA (contagem CRESCENTE)
       state <= CONTA;
       enable <= '1';
       wait for clk_period * 5;
