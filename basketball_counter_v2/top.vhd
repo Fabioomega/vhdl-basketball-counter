@@ -46,7 +46,7 @@ architecture Behavioral of top is
 	signal cents : integer range 0 to 99;
 	signal seconds : integer range 0 to 59;
 	signal minutes : integer range 0 to 59;
-	signal quarter : integer range 0 to 4;
+	signal quarter : integer range 1 to 4;
 
 	signal passed_cent : std_logic;
 	signal passed_sec : std_logic;
@@ -55,7 +55,7 @@ architecture Behavioral of top is
 
 	signal loaded_secs : integer range 0 to 59;
 	signal loaded_min : integer range 0 to 15;
-	signal loaded_quarters : integer range 0 to 4;
+	signal loaded_quarters : integer range 1 to 4;
 
 	signal d_para_continua : std_logic;
 	signal d_novo_quarto : std_logic;
@@ -69,7 +69,7 @@ architecture Behavioral of top is
 		0, 15, 30, 45
 	);
 
-	type quarter_table is array (0 to 3) of integer range 0 to 4;
+	type quarter_table is array (0 to 3) of integer range 1 to 4;
 
 	constant c_quarter_to_quarters : quarter_table := (
 		1, 2, 3, 4
@@ -161,7 +161,7 @@ begin
 		valor_carregado => loaded_quarters
 		);
 
-	fim_quarto <= '1' when (minutes = 0) and (seconds = 0) and (cents = 0) and (quarter = 0) else
+	fim_quarto <= '1' when (minutes = 0) and (seconds = 0) and (cents = 0) and (quarter = 4) else
 		'0';
 
 	process (clock, reset)

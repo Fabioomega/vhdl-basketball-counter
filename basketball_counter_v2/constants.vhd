@@ -14,6 +14,7 @@ package constants is
 
 	type STATE is (REP, CONTA, LOAD, PARADO);
 	constant cycles_for_1_cent : integer := 4;
+	-- constant cycles_for_1_cent : integer := 25_000;
 	-- type <new_type> is
 	--  record
 	--    <type_name>        : std_logic_vector( 7 downto 0);

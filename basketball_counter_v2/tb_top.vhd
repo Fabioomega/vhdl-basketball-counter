@@ -44,10 +44,24 @@ begin
                 clock <= not clock;
         end process;
 
-        reset <= '1', '0' after 10ns;
-		  -- c_segundos <= "11";
-		  -- c_minutos <= "0001";
-		  c_quarto <= "00";
-		  carga <= '1' after 20ns, '0' after 30ns;
-		  para_continua <= '1' after 50ns, '0' after 60ns;
+        reset <= '1', '0' after 95 ns, '1' after 20.700ms, '0' after 20.700095ms;
+        para_continua <= '0', '1' after 110ns, '0' after 120ns,
+                         '1' after 5.000110ms, '0' after 5.000120ms,
+                         '1' after 10.000110ms, '0' after 10.000120ms,
+                         '1' after 15.000110ms, '0' after 15.000120ms,
+                         '1' after 18.000190ms, '0' after 18.000200ms, -- parada por 1 ms
+                         '1' after 19.000190ms, '0' after 19.000200ms, -- parada por 1 ms
+                         '1' after 21.000000ms, '0' after 21.000010ms,
+                         '1' after 22.000000ms, '0' after 22.000010ms,
+                         '1' after 23.000000ms, '0' after 23.000010ms
+                         ;
+        novo_quarto <= '0',
+                       '1' after 5ms, '0' after 5.000010ms,
+                       '1' after 10ms, '0' after 10.000010ms,
+                       '1' after 15ms, '0' after 15.000010ms;
+
+        c_quarto <= "10"; -- Quarto=2
+        c_minutos <= "0101"; -- Minutos=5
+        c_segundos <= "11"; -- Segundos =13
+        carga <= '0', '1' after 21.000500ms, '0' after 21.000510ms;
 end;

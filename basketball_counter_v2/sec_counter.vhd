@@ -48,7 +48,7 @@ begin
 	process (clk, reset)
 	begin
 		if reset = '1' then
-			counter <= 99;
+			counter <= 0;
 		elsif clk'event and clk = '1' then
 			case state is
 				when REP =>

@@ -27,7 +27,10 @@ architecture Behavioral of min15_counter is
 begin
     process (clk, reset)
     begin
-        if clk'event and clk = '1' then
+
+        if reset = '1' then
+            contador_interno <= 15;
+        elsif clk'event and clk = '1' then
             case state is
                 when REP =>
                     -- Resta o contador para 15

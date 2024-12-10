@@ -61,6 +61,8 @@ begin
 					passed_cent <= '0';
 					counter <= counter + 1;
 				end if;
+			else
+				passed_cent <= '0';
 			end if;
 		end if;
 	end process;
