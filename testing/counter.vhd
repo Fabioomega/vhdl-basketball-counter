@@ -79,7 +79,7 @@ architecture Behavioral of counter is
 
 	signal EA, PE : states;
 	--EA -> Estado atual
-	--PE -> Próximo estado
+	--PE -> Prximo estado
 	signal divisor : integer range 0 to (clk_frequency_half - 1);
 
 	signal seconds_counter : integer range 0 to 59;
@@ -163,7 +163,7 @@ begin
 				end if;
 			end if;
 			
-			if EA = LOAD then
+			if EA = LOAD and load_button = '1' then
 				minutes_counter <= to_integer(unsigned(chaves));
 			end if;
 		end if;

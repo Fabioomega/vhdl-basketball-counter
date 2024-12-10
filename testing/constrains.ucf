@@ -2,7 +2,7 @@
 ###	nu'meros mostrados nos displays e vai-um no led LD0
 
 ## Sinais de controle do display
-NET "clock" LOC = B8; # clock vem do cristal
+NET "clk" LOC = B8; # clock vem do cristal
 NET "reset" LOC = B18; # reset vem do bot~ao BTN0
 
 # Sinais de carga e start

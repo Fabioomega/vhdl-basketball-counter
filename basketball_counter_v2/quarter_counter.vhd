@@ -39,15 +39,13 @@ begin
     process(clk, reset)
 	 begin
         if reset = '1' then
-            contador_interno <= 1;
-            quarter_enable <= '0';
+            contador_interno <= 4;
         elsif clk'event and clk = '1' then
             case state is
                 when REP =>
                     -- Reseta o contador para 4
                     contador_interno <= 1;
                     quarter_enable <= '0';
-
                 when CONTA =>
                     -- Estado de contagem decrementa se habilitado e maior que 0
                     if enable = '1' then
@@ -62,16 +60,13 @@ begin
                 when LOAD =>
                     -- Estado de carga (carregam valor externo)
                     contador_interno <= valor_carregado;
-                    quarter_enable <= '0';
                 
                 when PARADO =>
-                    -- Estado parado (mantém o valor atual)
-                    quarter_enable <= '0';
-                
+                    -- Estado parado (mantm o valor atual)
+						  
                 when others =>
-                    -- Estado de segurança
+                    -- Estado de segurana
                     contador_interno <= contador_interno;
-                    quarter_enable <= '0';
             end case;
         end if;
     end process;
