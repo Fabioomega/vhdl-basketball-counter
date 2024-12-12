@@ -35,7 +35,8 @@ begin
                 c_minutos => c_minutos,
                 c_segundos => c_segundos,
                 DSPL_sete_seg => open,
-                anodo => open
+                anodo => open,
+					 leds => open
                 );
 
         process

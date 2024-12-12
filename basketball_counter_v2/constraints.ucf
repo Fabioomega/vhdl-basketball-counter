@@ -1,0 +1,46 @@
+### UCF do Projeto Somador de 4 Bits com Vai-um 
+###	nu'meros mostrados nos displays e vai-um no led LD0
+
+## Sinais de controle do display
+NET "clock" LOC = B8; # clock vem do cristal
+NET "reset" LOC = B18; # reset vem do bot~ao BTN0
+
+# Sinais de carga e start
+NET "carga" LOC = H13;
+NET "para_continua" LOC = E18;
+NET "novo_quarto" LOC = D18;
+
+# Chaves de entrada do contador
+NET "c_segundos[0]" LOC = G18;
+NET "c_segundos[1]" LOC = H18;
+NET "c_minutos[0]" LOC = K18;
+NET "c_minutos[1]" LOC = K17;
+NET "c_minutos[2]" LOC = L14;
+NET "c_minutos[3]" LOC = L13;
+NET "c_quarto[0]" LOC = N17;
+NET "c_quarto[1]" LOC = R17;
+
+## Pinos do display
+NET "DSPL_sete_seg[7]"	LOC = L18;	# Segmento a
+NET "DSPL_sete_seg[6]"	LOC = F18;	# Segmento b
+NET "DSPL_sete_seg[5]"	LOC = D17;	# Segmento c
+NET "DSPL_sete_seg[4]"	LOC = D16;	# Segmento d
+NET "DSPL_sete_seg[3]"	LOC = G14;	# Segmento e
+NET "DSPL_sete_seg[2]"	LOC = J17;	# Segmento f
+NET "DSPL_sete_seg[1]"	LOC = H14;	# Segmento g
+NET "DSPL_sete_seg[0]"	LOC = C17;	# Segmento dp - decimal point
+
+NET "anodo[3]"	LOC = F17;	# anodo 3
+NET "anodo[2]"	LOC = H17;	# anodo 2
+NET "anodo[1]"	LOC = C18;	# anodo 1
+NET "anodo[0]"	LOC = F15;	# anodo 0
+
+## LEDS
+NET "led[0]" LOC = R4;
+NET "led[1]" LOC = F4;
+NET "led[2]" LOC = P15;
+NET "led[3]" LOC = E17;
+NET "led[4]" LOC = K14;
+NET "led[5]" LOC = K15;
+NET "led[6]" LOC = J15;
+NET "led[7]" LOC = J14;

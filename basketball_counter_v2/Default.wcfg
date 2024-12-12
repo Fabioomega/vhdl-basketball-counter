@@ -33,14 +33,6 @@
       <obj_property name="ElementShortName">carga</obj_property>
       <obj_property name="ObjectShortName">carga</obj_property>
    </wvobject>
-   <wvobject fp_name="/tb_top/uut/cur_state" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">cur_state</obj_property>
-      <obj_property name="ObjectShortName">cur_state</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/next_state" type="other" db_ref_id="1">
-      <obj_property name="ElementShortName">next_state</obj_property>
-      <obj_property name="ObjectShortName">next_state</obj_property>
-   </wvobject>
    <wvobject fp_name="/tb_top/uut/passed_cent" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">passed_cent</obj_property>
       <obj_property name="ObjectShortName">passed_cent</obj_property>
@@ -72,5 +64,13 @@
    <wvobject fp_name="/tb_top/uut/quarter" type="other" db_ref_id="1">
       <obj_property name="ElementShortName">quarter</obj_property>
       <obj_property name="ObjectShortName">quarter</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/cur_state" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">cur_state</obj_property>
+      <obj_property name="ObjectShortName">cur_state</obj_property>
+   </wvobject>
+   <wvobject fp_name="/tb_top/uut/next_state" type="other" db_ref_id="1">
+      <obj_property name="ElementShortName">next_state</obj_property>
+      <obj_property name="ObjectShortName">next_state</obj_property>
    </wvobject>
 </wave_config>
