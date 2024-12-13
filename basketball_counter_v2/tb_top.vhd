@@ -34,8 +34,8 @@ begin
                 c_quarto => c_quarto,
                 c_minutos => c_minutos,
                 c_segundos => c_segundos,
-                DSPL_sete_seg => open,
-                anodo => open,
+                DSPL_sete_seg => DSPL_sete_seg,
+                anodo => anodo,
 					 leds => open
                 );
 

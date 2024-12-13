@@ -8,11 +8,13 @@
             <top_module name="constants" />
             <top_module name="numeric_std" />
             <top_module name="std_logic_1164" />
+            <top_module name="std_logic_arith" />
+            <top_module name="std_logic_unsigned" />
             <top_module name="tb_top" />
          </top_modules>
       </db_ref>
    </db_ref_list>
-   <WVObjectSize size="15" />
+   <WVObjectSize size="14" />
    <wvobject fp_name="/tb_top/clock" type="logic" db_ref_id="1">
       <obj_property name="ElementShortName">clock</obj_property>
       <obj_property name="ObjectShortName">clock</obj_property>
@@ -56,10 +58,6 @@
    <wvobject fp_name="/tb_top/uut/minutes" type="other" db_ref_id="1">
       <obj_property name="ElementShortName">minutes</obj_property>
       <obj_property name="ObjectShortName">minutes</obj_property>
-   </wvobject>
-   <wvobject fp_name="/tb_top/uut/passed_quarter" type="logic" db_ref_id="1">
-      <obj_property name="ElementShortName">passed_quarter</obj_property>
-      <obj_property name="ObjectShortName">passed_quarter</obj_property>
    </wvobject>
    <wvobject fp_name="/tb_top/uut/quarter" type="other" db_ref_id="1">
       <obj_property name="ElementShortName">quarter</obj_property>

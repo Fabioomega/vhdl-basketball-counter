@@ -36,11 +36,11 @@ NET "anodo[1]"	LOC = C18;	# anodo 1
 NET "anodo[0]"	LOC = F15;	# anodo 0
 
 ## LEDS
-NET "led[0]" LOC = R4;
-NET "led[1]" LOC = F4;
-NET "led[2]" LOC = P15;
-NET "led[3]" LOC = E17;
-NET "led[4]" LOC = K14;
-NET "led[5]" LOC = K15;
-NET "led[6]" LOC = J15;
-NET "led[7]" LOC = J14;
+NET "leds[7]" LOC = P4;
+NET "leds[6]" LOC = E4;
+NET "leds[5]" LOC = P16;
+NET "leds[4]" LOC = E16;
+NET "leds[3]" LOC = K14;
+NET "leds[2]" LOC = K15;
+NET "leds[1]" LOC = J15;
+NET "leds[0]" LOC = J14;

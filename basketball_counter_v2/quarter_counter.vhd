@@ -43,20 +43,15 @@ begin
             case state is
                 when REP =>
                 when CONTA =>
-                    -- Estado de contagem decrementa se habilitado e maior que 0
+                when LOAD =>
+                    -- Estado de carga (carregam valor externo)
+                    contador_interno <= valor_carregado;
+                when PARADO =>
                     if enable = '1' then
                         if contador_interno < 4 then
                             contador_interno <= contador_interno + 1;
                         end if;
                     end if;
-
-                when LOAD =>
-                    -- Estado de carga (carregam valor externo)
-                    contador_interno <= valor_carregado;
-
-                when PARADO =>
-                    -- Estado parado (mantm o valor atual)
-
                 when others =>
                     -- Estado de segurana
                     contador_interno <= contador_interno;
