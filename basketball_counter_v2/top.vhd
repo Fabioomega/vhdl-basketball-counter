@@ -52,7 +52,6 @@ architecture Behavioral of top is
 	signal passed_cent : std_logic;
 	signal passed_sec : std_logic;
 	signal passed_min : std_logic;
-	signal passed_quarter : std_logic;
 
 	signal loaded_secs : integer range 0 to 59;
 	signal reserved_loaded_secs : integer range 0 to 59;
